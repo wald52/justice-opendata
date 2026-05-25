@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorateur de Données - Justice Open Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PapaParse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h2>Justice<span class="text-accent">Data</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li class="active"><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-sun"></i> Mode Clair
+                </button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Explorateur de données</h1>
+                    <p class="subtitle">Interrogez directement les jeux de données bruts</p>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="glass-panel mb-4">
+                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <div style="flex-grow: 1;">
+                            <label for="dataset-url" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">URL d'un fichier CSV (data.gouv.fr)</label>
+                            <input type="text" id="dataset-url" placeholder="https://..." value="https://www.data.gouv.fr/fr/datasets/r/5833e5fd-da99-4483-9b90-30e613a3f688" style="width: 100%; padding: 0.75rem; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary);">
+                        </div>
+                        <button class="btn btn-outline" style="background: var(--accent-primary); color: white; border: none; padding: 0.75rem 1.5rem;" onclick="loadCSV()">
+                            <i class="fa-solid fa-download"></i> Charger
+                        </button>
+                    </div>
+                    <p class="text-muted mt-4" style="font-size: 0.85rem;"><i class="fa-solid fa-triangle-exclamation"></i> Note: En raison des règles CORS (sécurité des navigateurs), le chargement direct d'URLs externes peut être bloqué s'ils n'autorisent pas l'origine. En production, les scripts Python téléchargent les données.</p>
+                </div>
+
+                <div class="glass-panel" id="table-container" style="display: none;">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="data-table" id="data-table-view">
+                            <thead>
+                                <tr id="table-head"></tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script>
+        function loadCSV() {
+            // Interface de démo (en réalité on utiliserait PapaParse sur le CSV local téléchargé par Python)
+            const container = document.getElementById('table-container');
+            const thead = document.getElementById('table-head');
+            const tbody = document.getElementById('table-body');
+            
+            container.style.display = 'block';
+            thead.innerHTML = '<th>Aperçu</th><th>Status</th>';
+            tbody.innerHTML = '<tr><td>Chargement des données...</td><td>Simulé (Démo)</td></tr>';
+            
+            // Simuler un chargement réussi pour la démo UI
+            setTimeout(() => {
+                thead.innerHTML = '<th>ID</th><th>Catégorie</th><th>Valeur 2023</th><th>Valeur 2024</th>';
+                tbody.innerHTML = `
+                    <tr><td>1</td><td>Exemple A</td><td>15,400</td><td>16,200</td></tr>
+                    <tr><td>2</td><td>Exemple B</td><td>8,200</td><td>7,900</td></tr>
+                    <tr><td>3</td><td>Exemple C</td><td>45,000</td><td>46,500</td></tr>
+                `;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

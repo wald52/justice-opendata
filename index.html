@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice Open Data France</title>
+    <meta name="description" content="Plateforme d'analyse et de visualisation des données ouvertes de la justice française.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h2>Justice<span class="text-accent">Data</span></h2>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="active"><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-sun"></i> Mode Clair
+                </button>
+                <div class="source-info">
+                    <small>Source: data.gouv.fr</small>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Tableau de bord</h1>
+                    <p class="subtitle">Aperçu global de l'activité judiciaire en France</p>
+                </div>
+                <div class="user-actions">
+                    <a href="https://github.com" target="_blank" class="btn btn-outline">
+                        <i class="fa-brands fa-github"></i> Code Source
+                    </a>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Key Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon blue"><i class="fa-solid fa-file-signature"></i></div>
+                        <div class="metric-details">
+                            <h3>Affaires nouvelles</h3>
+                            <p class="metric-value" id="val-affaires">2.8M</p>
+                            <span class="metric-trend positive"><i class="fa-solid fa-arrow-up"></i> 1.2%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon red"><i class="fa-solid fa-gavel"></i></div>
+                        <div class="metric-details">
+                            <h3>Condamnations pénales</h3>
+                            <p class="metric-value" id="val-condamnations">485K</p>
+                            <span class="metric-trend negative"><i class="fa-solid fa-arrow-down"></i> 3.4%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon yellow"><i class="fa-solid fa-building-shield"></i></div>
+                        <div class="metric-details">
+                            <h3>Population carcérale</h3>
+                            <p class="metric-value" id="val-population">76,244</p>
+                            <span class="metric-trend positive"><i class="fa-solid fa-arrow-up"></i> 4.5%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon green"><i class="fa-solid fa-euro-sign"></i></div>
+                        <div class="metric-details">
+                            <h3>Budget Justice</h3>
+                            <p class="metric-value" id="val-budget">10.1Md€</p>
+                            <span class="metric-trend positive"><i class="fa-solid fa-arrow-up"></i> 5.3%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-grid">
+                    <div class="chart-container glass-panel col-span-2">
+                        <div class="chart-header">
+                            <h2>Évolution de l'activité judiciaire (10 ans)</h2>
+                            <div class="chart-actions">
+                                <select class="select-styled" id="activity-filter">
+                                    <option value="all">Toutes affaires</option>
+                                    <option value="civil">Civil</option>
+                                    <option value="penal">Pénal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="canvas-wrapper" style="position: relative; height:300px; width:100%">
+                            <canvas id="activityChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <h2>Répartition des contentieux</h2>
+                        </div>
+                        <div class="canvas-wrapper" style="position: relative; height:300px; width:100%">
+                            <canvas id="repartitionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Section -->
+                <div class="info-section glass-panel mt-4">
+                    <h2>Le saviez-vous ?</h2>
+                    <div class="facts-grid">
+                        <div class="fact-item">
+                            <i class="fa-solid fa-stopwatch text-accent"></i>
+                            <p>La durée moyenne d'une affaire civile devant le Tribunal Judiciaire est d'environ <strong>14.5 mois</strong>.</p>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fa-solid fa-scale-unbalanced text-accent"></i>
+                            <p>Près de <strong>55%</strong> des condamnations pénales concernent des délits routiers (circulation).</p>
+                        </div>
+                        <div class="fact-item">
+                            <i class="fa-solid fa-handshake-angle text-accent"></i>
+                            <p>Plus d'<strong>un million</strong> de décisions d'aide juridictionnelle sont rendues chaque année.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        // Init index charts
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof initIndexCharts === 'function') {
+                initIndexCharts();
+            }
+        });
+    </script>
+</body>
+</html>

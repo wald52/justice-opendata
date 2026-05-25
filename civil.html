@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice Civile - Justice Open Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h2>Justice<span class="text-accent">Data</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li class="active"><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-sun"></i> Mode Clair
+                </button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Justice Civile</h1>
+                    <p class="subtitle">Activité des Tribunaux Judiciaires, Cours d'appel et Prud'hommes</p>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon blue"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="metric-details">
+                            <h3>Affaires Terminées (TJ)</h3>
+                            <p class="metric-value">1.42M</p>
+                            <span class="metric-trend positive">Total Annuel</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon yellow"><i class="fa-solid fa-clock"></i></div>
+                        <div class="metric-details">
+                            <h3>Durée Moyenne (Divorce)</h3>
+                            <p class="metric-value">14.5m</p>
+                            <span class="metric-trend">Mois</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel mb-4">
+                    <h2 class="mb-4">Contentieux de la famille</h2>
+                    <p class="text-secondary mb-4">Le contentieux familial représente plus de 40% de l'activité civile des Tribunaux Judiciaires.</p>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Catégorie</th>
+                                    <th>Volume traité</th>
+                                    <th>Délai moyen d'écoulement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Divorces et séparations de corps</td>
+                                    <td>125 000</td>
+                                    <td>14.5 mois</td>
+                                </tr>
+                                <tr>
+                                    <td>Autorité parentale et pensions alimentaires (hors divorce)</td>
+                                    <td>195 000</td>
+                                    <td>8.2 mois</td>
+                                </tr>
+                                <tr>
+                                    <td>Assistance éducative</td>
+                                    <td>110 000</td>
+                                    <td>6.1 mois</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice Pénale - Justice Open Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h2>Justice<span class="text-accent">Data</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li class="active"><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-sun"></i> Mode Clair
+                </button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Justice Pénale</h1>
+                    <p class="subtitle">Analyse des condamnations et des infractions (Casier Judiciaire National)</p>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="glass-panel mb-4">
+                    <h2 class="mb-4">Condamnations par type de juridiction (2023)</h2>
+                    <p class="text-secondary mb-4">La majorité des condamnations pénales sont prononcées par les Tribunaux Correctionnels, suivis par les tribunaux de police (contraventions de 5ème classe).</p>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Type de juridiction</th>
+                                    <th>Nombre de condamnations</th>
+                                    <th>Part (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tribunaux Correctionnels</td>
+                                    <td>398 450</td>
+                                    <td>82.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Tribunaux de Police / Proximité</td>
+                                    <td>75 200</td>
+                                    <td>15.5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Juridictions pour mineurs</td>
+                                    <td>9 850</td>
+                                    <td>2.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>Cours d'Assises / Cours Criminelles</td>
+                                    <td>1 950</td>
+                                    <td>0.4%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <h2>Peines prononcées</h2>
+                        </div>
+                        <div style="position: relative; height:300px; width:100%" class="flex justify-center items-center text-muted">
+                            <i class="fa-solid fa-chart-pie fa-3x mb-2"></i>
+                            <p>Graphique des peines (Amendes, Prison ferme, Sursis, TIG) à venir</p>
+                        </div>
+                    </div>
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <h2>Nomenclature NATINF</h2>
+                        </div>
+                        <div style="position: relative; height:300px; width:100%">
+                            <p class="text-secondary mb-4">Extrait de la liste des infractions en vigueur</p>
+                            <div class="table-responsive" style="max-height: 220px; overflow-y: auto;">
+                                <table class="data-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Qualification</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>6003</td><td>VOL</td></tr>
+                                        <tr><td>7193</td><td>ESCROQUERIE</td></tr>
+                                        <tr><td>102</td><td>MEURTRE</td></tr>
+                                        <tr><td>11016</td><td>CONDUITE SOUS L'EMPIRE D'UN ETAT ALCOOLIQUE</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
