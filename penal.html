@@ -19,8 +19,14 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
-                <li class="active"><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
+                <li class='active'><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
                 <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
                 <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
                 <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
             </ul>
@@ -35,87 +41,96 @@
             <header class="topbar">
                 <div class="page-title">
                     <h1>Justice Pénale</h1>
-                    <p class="subtitle">Analyse des condamnations et des infractions (Casier Judiciaire National)</p>
+                    <p class="subtitle">Analyse des condamnations et répartition par type d'infraction</p>
                 </div>
             </header>
 
             <div class="dashboard-content">
-                <div class="glass-panel mb-4">
-                    <h2 class="mb-4">Condamnations par type de juridiction (2023)</h2>
-                    <p class="text-secondary mb-4">La majorité des condamnations pénales sont prononcées par les Tribunaux Correctionnels, suivis par les tribunaux de police (contraventions de 5ème classe).</p>
-                    <div class="table-responsive">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Type de juridiction</th>
-                                    <th>Nombre de condamnations</th>
-                                    <th>Part (%)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tribunaux Correctionnels</td>
-                                    <td>398 450</td>
-                                    <td>82.1%</td>
-                                </tr>
-                                <tr>
-                                    <td>Tribunaux de Police / Proximité</td>
-                                    <td>75 200</td>
-                                    <td>15.5%</td>
-                                </tr>
-                                <tr>
-                                    <td>Juridictions pour mineurs</td>
-                                    <td>9 850</td>
-                                    <td>2.0%</td>
-                                </tr>
-                                <tr>
-                                    <td>Cours d'Assises / Cours Criminelles</td>
-                                    <td>1 950</td>
-                                    <td>0.4%</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon red"><i class="fa-solid fa-gavel"></i></div>
+                        <div class="metric-details">
+                            <h3>Total Condamnations</h3>
+                            <p class="metric-value" id="val-condamnations">...</p>
+                            <span class="metric-trend" id="trend-condamnations">Chargement</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon primary"><i class="fa-solid fa-car-burst"></i></div>
+                        <div class="metric-details">
+                            <h3>1ère cause</h3>
+                            <p class="metric-value" id="val-top-infraction" style="font-size:1.1rem;">...</p>
+                            <span class="metric-trend">Infraction principale</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon green"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <div class="metric-details">
+                            <h3>Peines alternatives</h3>
+                            <p class="metric-value" id="val-alternatives">...</p>
+                            <span class="metric-trend">TIG, jours-amende...</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="charts-grid">
+                <div class="charts-grid mt-4">
                     <div class="chart-container glass-panel">
                         <div class="chart-header">
-                            <h2>Peines prononcées</h2>
+                            <h2>Répartition par type d'infraction</h2>
                         </div>
-                        <div style="position: relative; height:300px; width:100%" class="flex justify-center items-center text-muted">
-                            <i class="fa-solid fa-chart-pie fa-3x mb-2"></i>
-                            <p>Graphique des peines (Amendes, Prison ferme, Sursis, TIG) à venir</p>
+                        <div class="canvas-wrapper" style="position: relative; height:320px; width:100%">
+                            <canvas id="infractionsChart"></canvas>
                         </div>
                     </div>
+                    
                     <div class="chart-container glass-panel">
                         <div class="chart-header">
-                            <h2>Nomenclature NATINF</h2>
+                            <h2>Évolution du type de peines prononcées</h2>
                         </div>
-                        <div style="position: relative; height:300px; width:100%">
-                            <p class="text-secondary mb-4">Extrait de la liste des infractions en vigueur</p>
-                            <div class="table-responsive" style="max-height: 220px; overflow-y: auto;">
-                                <table class="data-table" style="font-size: 0.8rem;">
-                                    <thead>
-                                        <tr>
-                                            <th>Code</th>
-                                            <th>Qualification</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>6003</td><td>VOL</td></tr>
-                                        <tr><td>7193</td><td>ESCROQUERIE</td></tr>
-                                        <tr><td>102</td><td>MEURTRE</td></tr>
-                                        <tr><td>11016</td><td>CONDUITE SOUS L'EMPIRE D'UN ETAT ALCOOLIQUE</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div class="canvas-wrapper" style="position: relative; height:320px; width:100%">
+                            <canvas id="peinesEvolutionChart"></canvas>
                         </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="margin-top: 1.5rem;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2>Nomenclature NATINF (Extrait)</h2>
+                    </div>
+                    <p class="text-secondary mb-4">La nomenclature NATINF codifie l'ensemble des infractions prévues par le Code Pénal et les textes particuliers. Elle est utilisée sur les avis de condamnations et dans les statistiques.</p>
+                    <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Code NATINF</th>
+                                    <th>Qualification (Libellé court)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>6003</td><td>VOL</td></tr>
+                                <tr><td>7193</td><td>ESCROQUERIE</td></tr>
+                                <tr><td>102</td><td>MEURTRE</td></tr>
+                                <tr><td>11016</td><td>CONDUITE SOUS L'EMPIRE D'UN ETAT ALCOOLIQUE</td></tr>
+                                <tr><td>1415</td><td>VIOLENCES PAR CONJOINT SANS ITT</td></tr>
+                                <tr><td>16124</td><td>USAGE ILLICITE DE STUPEFIANTS</td></tr>
+                                <tr><td>1154</td><td>TRAFIC DE STUPEFIANTS</td></tr>
+                                <tr><td>7594</td><td>DEGRADATION OU DETERIORATION D'UN BIEN</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
     <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof initCondamnationsCharts === 'function') {
+                initCondamnationsCharts();
+            }
+        });
+    </script>
 </body>
 </html>

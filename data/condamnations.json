@@ -1,0 +1,61 @@
+{
+  "metrics": {
+    "total_condamnations": "489 500",
+    "trend_condamnations": "-2.1%",
+    "taux_emprisonnement": "21%",
+    "peines_alternatives": "34%",
+    "top_infraction": "Infractions routières"
+  },
+  "repartition_infractions": {
+    "labels": [
+      "Circulation routière",
+      "Vols et recels",
+      "Atteintes aux personnes (violences)",
+      "Stupéfiants",
+      "Atteintes aux biens (dégradations)",
+      "Autres"
+    ],
+    "data": [
+      165000,
+      85000,
+      75000,
+      68000,
+      45000,
+      51500
+    ]
+  },
+  "evolution_peines": {
+    "labels": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "ferme": [
+      105000,
+      102000,
+      85000,
+      92000,
+      98000,
+      101000
+    ],
+    "sursis": [
+      220000,
+      215000,
+      180000,
+      195000,
+      210000,
+      215000
+    ],
+    "alternatives": [
+      150000,
+      160000,
+      140000,
+      155000,
+      165000,
+      173500
+    ]
+  }
+}

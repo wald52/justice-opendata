@@ -8,7 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .map-container { height: calc(100vh - 220px); min-height: 500px; border-radius: var(--radius-md); overflow: hidden; }
+        .map-controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; padding: 0 0.5rem; }
+        .map-controls .select-styled, .map-controls .search-input {
+            background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border);
+            padding: 0.5rem 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; font-family: var(--font-primary);
+        }
+        .map-controls .search-input { flex: 1; min-width: 220px; }
+        .map-legend { display: flex; gap: 1.2rem; align-items: center; font-size: 0.85rem; color: var(--text-secondary); flex-wrap: wrap; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle; }
+        .legend-ca { background: #6366f1; }
+        .legend-tj { background: #10b981; }
+        .legend-cph { background: #f59e0b; }
+        .map-stats { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+        .map-stat { display: flex; align-items: center; gap: 0.5rem; }
+        .map-stat .stat-num { font-weight: 700; font-size: 1.3rem; color: var(--text-primary); }
+        .map-stat .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+        /* Custom Leaflet popup */
+        .leaflet-popup-content-wrapper { background: var(--bg-surface) !important; color: var(--text-primary) !important; border-radius: 8px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; }
+        .leaflet-popup-tip { background: var(--bg-surface) !important; }
+        .leaflet-popup-content { font-family: 'Inter', sans-serif !important; font-size: 0.9rem !important; }
+        .popup-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .popup-type { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
+        .popup-communes { font-size: 0.8rem; color: var(--accent); }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -20,9 +48,15 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
                 <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
                 <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
-                <li class="active"><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
+                <li class='active'><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
                 <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
             </ul>
             <div class="sidebar-footer">
@@ -35,27 +69,34 @@
         <main class="main-content">
             <header class="topbar">
                 <div class="page-title">
-                    <h1>Carte Judiciaire</h1>
-                    <p class="subtitle">Implantation géographique des juridictions en France (TJ, CA, CPH)</p>
+                    <h1>Carte Judiciaire Interactive</h1>
+                    <p class="subtitle">Implantation géographique de toutes les juridictions en France</p>
                 </div>
             </header>
 
             <div class="dashboard-content">
-                <div class="glass-panel" style="padding: 1rem;">
-                    <div class="flex" style="display:flex; justify-content: space-between; margin-bottom: 1rem; padding: 0 1rem;">
-                        <h2 style="margin: 0;">Ressorts et implantations</h2>
-                        <div>
-                            <select class="select-styled" id="court-filter">
-                                <option value="all">Toutes juridictions</option>
-                                <option value="tj">Tribunaux Judiciaires</option>
-                                <option value="ca">Cours d'Appel</option>
-                            </select>
-                        </div>
+                <div class="glass-panel" style="padding: 1.2rem;">
+                    <div class="map-controls">
+                        <input type="text" class="search-input" id="search-city" placeholder="🔍 Rechercher une ville ou une juridiction...">
+                        <select class="select-styled" id="court-filter">
+                            <option value="all">Toutes juridictions</option>
+                            <option value="ca">Cours d'Appel</option>
+                            <option value="tj">Tribunaux Judiciaires</option>
+                            <option value="cph">Conseils de Prud'hommes</option>
+                        </select>
                     </div>
-                    <div id="map" class="map-container"></div>
-                </div>
-                <div class="info-section glass-panel mt-4">
-                    <p class="text-secondary"><i class="fa-solid fa-circle-info text-accent"></i> Carte de démonstration. En production, cette carte chargera les coordonnées depuis les <strong>données géocodées des structures de la Justice</strong> (data.gouv.fr).</p>
+                    <div class="map-legend">
+                        <span><span class="legend-dot legend-ca"></span> Cours d'Appel</span>
+                        <span><span class="legend-dot legend-tj"></span> Tribunaux Judiciaires</span>
+                        <span><span class="legend-dot legend-cph"></span> Conseils de Prud'hommes</span>
+                    </div>
+                    <div id="map" class="map-container" style="margin-top: 0.8rem;"></div>
+                    <div class="map-stats" id="map-stats">
+                        <div class="map-stat"><span class="stat-num" id="stat-total">—</span><span class="stat-label">juridictions affichées</span></div>
+                        <div class="map-stat"><span class="stat-num" id="stat-ca">—</span><span class="stat-label">Cours d'Appel</span></div>
+                        <div class="map-stat"><span class="stat-num" id="stat-tj">—</span><span class="stat-label">Tribunaux Judiciaires</span></div>
+                        <div class="map-stat"><span class="stat-num" id="stat-cph">—</span><span class="stat-label">Conseils de Prud'hommes</span></div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -63,45 +104,113 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet MarkerCluster -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="js/app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialisation basique de la carte
-            const map = L.map('map').setView([46.603354, 1.888334], 6); // Centre de la France
+    document.addEventListener('DOMContentLoaded', () => {
+        // ── Map Init ──
+        const map = L.map('map', { zoomControl: true }).setView([46.603354, 1.888334], 6);
 
-            const isDark = document.documentElement.classList.contains('dark');
-            const tileLayer = isDark ? 
-                'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 
-                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const isDark = document.documentElement.classList.contains('dark');
+        const darkTile = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+        const lightTile = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        const layer = L.tileLayer(isDark ? darkTile : lightTile, {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Carto'
+        }).addTo(map);
 
-            const layer = L.tileLayer(tileLayer, {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            // Mettre à jour la tuile au changement de thème
-            window.addEventListener('themeChanged', () => {
-                const dark = document.documentElement.classList.contains('dark');
-                const newTile = dark ? 
-                    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' : 
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-                layer.setUrl(newTile);
-            });
-
-            // Ajouter quelques marqueurs démo
-            const courts = [
-                { lat: 48.8566, lng: 2.3522, name: "Cour de cassation (Paris)" },
-                { lat: 45.7640, lng: 4.8357, name: "Cour d'appel (Lyon)" },
-                { lat: 43.2965, lng: 5.3698, name: "Tribunal Judiciaire (Marseille)" },
-                { lat: 44.8378, lng: -0.5792, name: "Cour d'appel (Bordeaux)" },
-                { lat: 50.6292, lng: 3.0573, name: "Tribunal Judiciaire (Lille)" }
-            ];
-
-            courts.forEach(court => {
-                L.marker([court.lat, court.lng])
-                 .bindPopup(`<b>${court.name}</b>`)
-                 .addTo(map);
-            });
+        window.addEventListener('themeChanged', () => {
+            const dark = document.documentElement.classList.contains('dark');
+            layer.setUrl(dark ? darkTile : lightTile);
         });
+
+        // ── Marker colors ──
+        function markerIcon(type) {
+            const colors = { ca: '#6366f1', tj: '#10b981', cph: '#f59e0b' };
+            const color = colors[type] || '#6366f1';
+            const size = type === 'ca' ? 14 : 10;
+            return L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid rgba(255,255,255,0.8);box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>`,
+                iconSize: [size, size],
+                iconAnchor: [size/2, size/2]
+            });
+        }
+
+        const typeLabels = {
+            ca: "Cour d'Appel",
+            tj: "Tribunal Judiciaire",
+            cph: "Conseil de Prud'hommes"
+        };
+
+        // ── Load data ──
+        let allData = [];
+        const clusterGroup = L.markerClusterGroup({
+            maxClusterRadius: 35,
+            spiderfyOnMaxZoom: true,
+            showCoverageOnHover: false
+        });
+        map.addLayer(clusterGroup);
+
+        fetch('data/juridictions_geo.json')
+            .then(r => r.json())
+            .then(data => {
+                allData = data;
+                renderMarkers(data);
+            })
+            .catch(err => console.error('Erreur chargement juridictions:', err));
+
+        function renderMarkers(data) {
+            clusterGroup.clearLayers();
+            data.forEach(j => {
+                const marker = L.marker([j.lat, j.lng], { icon: markerIcon(j.type) });
+                marker.bindPopup(`
+                    <div class="popup-title">${j.name}</div>
+                    <div class="popup-type">${typeLabels[j.type] || j.type}</div>
+                    <div class="popup-communes"><i class="fa-solid fa-city"></i> ${j.communes.toLocaleString('fr-FR')} communes rattachées</div>
+                `);
+                clusterGroup.addLayer(marker);
+            });
+            updateStats(data);
+        }
+
+        function updateStats(data) {
+            document.getElementById('stat-total').textContent = data.length;
+            document.getElementById('stat-ca').textContent = data.filter(j => j.type === 'ca').length;
+            document.getElementById('stat-tj').textContent = data.filter(j => j.type === 'tj').length;
+            document.getElementById('stat-cph').textContent = data.filter(j => j.type === 'cph').length;
+        }
+
+        // ── Filtering ──
+        const filterSelect = document.getElementById('court-filter');
+        const searchInput = document.getElementById('search-city');
+
+        function applyFilters() {
+            const typeFilter = filterSelect.value;
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            let filtered = allData;
+
+            if (typeFilter !== 'all') {
+                filtered = filtered.filter(j => j.type === typeFilter);
+            }
+            if (searchTerm) {
+                filtered = filtered.filter(j =>
+                    j.name.toLowerCase().includes(searchTerm) ||
+                    j.city.toLowerCase().includes(searchTerm)
+                );
+            }
+            renderMarkers(filtered);
+
+            // Zoom to results if search is active
+            if (searchTerm && filtered.length > 0 && filtered.length <= 5) {
+                const bounds = L.latLngBounds(filtered.map(j => [j.lat, j.lng]));
+                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 12 });
+            }
+        }
+
+        filterSelect.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
+    });
     </script>
 </body>
 </html>

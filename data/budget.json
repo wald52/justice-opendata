@@ -1,0 +1,45 @@
+{
+  "metrics": {
+    "budget_total": "10,14 Md€",
+    "trend_budget": "+5.3%",
+    "effectifs_totaux": "94 300",
+    "creation_postes": "+1 920",
+    "budget_prisons": "3,9 Md€"
+  },
+  "timeseries": {
+    "labels": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "budget": [
+      7.0,
+      7.3,
+      7.6,
+      8.2,
+      8.9,
+      9.6,
+      10.14
+    ]
+  },
+  "repartition_missions": {
+    "labels": [
+      "Administration Pénitentiaire",
+      "Justice Judiciaire",
+      "Protection Judiciaire de la Jeunesse",
+      "Secrétariat Général & Informatique",
+      "Accès au Droit (dont AJ)"
+    ],
+    "data": [
+      3900,
+      3600,
+      950,
+      1040,
+      650
+    ]
+  }
+}

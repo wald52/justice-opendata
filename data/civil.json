@@ -1,0 +1,40 @@
+{
+  "metrics": {
+    "total_affaires": "1 845 000",
+    "trend_affaires": "+1.2%",
+    "taux_conciliation_cph": "8.5%",
+    "divorces_consentement": "54%"
+  },
+  "repartition_divorces": {
+    "labels": [
+      "Consentement mutuel",
+      "Acceptation du principe de la rupture",
+      "Altération définitive du lien conjugal",
+      "Faute"
+    ],
+    "data": [
+      65000,
+      35000,
+      15000,
+      6000
+    ]
+  },
+  "evolution_tutelles": {
+    "labels": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "data": [
+      750000,
+      780000,
+      805000,
+      815000,
+      830000,
+      845000
+    ]
+  }
+}

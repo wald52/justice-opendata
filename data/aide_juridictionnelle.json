@@ -1,0 +1,47 @@
+{
+  "metrics": {
+    "total_admissions": "1 015 240",
+    "trend_admissions": "+2.1%",
+    "budget_total": "635 M€",
+    "trend_budget": "+8.4%",
+    "taux_acceptation": "85.4%"
+  },
+  "timeseries": {
+    "labels": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "admissions_totales": [
+      980000,
+      985000,
+      995000,
+      1005000,
+      1010000,
+      850000,
+      990000,
+      1002000,
+      1015240
+    ]
+  },
+  "repartition_contentieux": {
+    "labels": [
+      "Civil",
+      "Pénal",
+      "Administratif",
+      "Autres"
+    ],
+    "data": [
+      55,
+      35,
+      8,
+      2
+    ]
+  }
+}

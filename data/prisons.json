@@ -1,0 +1,73 @@
+{
+  "metrics": {
+    "population_detenue": "76 244",
+    "trend_detenus": "+4.5%",
+    "densite_carcerale": "125.8%",
+    "trend_densite": "+5.2%",
+    "amenagements": "11 340"
+  },
+  "timeseries": {
+    "labels": [
+      "Jan 2023",
+      "Fév 2023",
+      "Mar 2023",
+      "Avr 2023",
+      "Mai 2023",
+      "Juin 2023",
+      "Juil 2023",
+      "Août 2023",
+      "Sep 2023",
+      "Oct 2023",
+      "Nov 2023",
+      "Déc 2023",
+      "Jan 2024",
+      "Fév 2024"
+    ],
+    "population": [
+      72100,
+      72350,
+      72500,
+      73000,
+      73100,
+      73600,
+      74200,
+      74500,
+      74800,
+      75200,
+      75500,
+      75800,
+      76000,
+      76244
+    ],
+    "places_operationnelles": [
+      60500,
+      60550,
+      60600,
+      60600,
+      60650,
+      60700,
+      60700,
+      60750,
+      60800,
+      60800,
+      60850,
+      60900,
+      60950,
+      61000
+    ]
+  },
+  "categories": {
+    "labels": [
+      "Prévenus (en attente de jugement)",
+      "Condamnés",
+      "Contrainte pénale",
+      "Autres"
+    ],
+    "data": [
+      21500,
+      53200,
+      1100,
+      444
+    ]
+  }
+}

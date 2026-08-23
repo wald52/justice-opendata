@@ -1,0 +1,47 @@
+{
+  "metrics": {
+    "affaires_nouvelles": "3 125 000",
+    "affaires_terminees": "3 050 000",
+    "taux_couverture": "97.6%",
+    "taux_classement_sans_suite": "68%"
+  },
+  "flux_annuels": {
+    "labels": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "entrees": [
+      3300000,
+      2700000,
+      3100000,
+      3150000,
+      3125000
+    ],
+    "sorties": [
+      3250000,
+      2550000,
+      3050000,
+      3100000,
+      3050000
+    ]
+  },
+  "motifs_classement": {
+    "labels": [
+      "Auteur inconnu",
+      "Infraction insuffisamment caractérisée",
+      "Préjudice ou trouble mineur",
+      "Absence d'infraction",
+      "Autres"
+    ],
+    "data": [
+      45,
+      25,
+      12,
+      10,
+      8
+    ]
+  }
+}

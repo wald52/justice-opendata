@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget & Moyens - Justice Open Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <h2>Justice<span class="text-accent">Data</span></h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
+                <li class='active'><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-sun"></i> Mode Clair
+                </button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Budget & Moyens</h1>
+                    <p class="subtitle">Analyse du budget du Ministère de la Justice (Mission Justice)</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn btn-outline" id="refresh-data-btn">
+                        <i class="fa-solid fa-rotate-right"></i> Actualiser les données
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon green"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                        <div class="metric-details">
+                            <h3>Budget Total</h3>
+                            <p class="metric-value" id="val-budget-total">...</p>
+                            <span class="metric-trend" id="trend-budget">Chargement</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon primary"><i class="fa-solid fa-user-tie"></i></div>
+                        <div class="metric-details">
+                            <h3>Effectifs</h3>
+                            <p class="metric-value" id="val-effectifs">...</p>
+                            <span class="metric-trend" id="trend-effectifs">Chargement</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon red"><i class="fa-solid fa-building-shield"></i></div>
+                        <div class="metric-details">
+                            <h3>Budget Pénitentiaire</h3>
+                            <p class="metric-value" id="val-budget-prisons">...</p>
+                            <span class="metric-trend">Administration pénitentiaire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container glass-panel col-span-2">
+                        <div class="chart-header">
+                            <h2>Évolution du Budget de la Justice (en Milliards d'€)</h2>
+                        </div>
+                        <div class="canvas-wrapper" style="position: relative; height:350px; width:100%">
+                            <canvas id="budgetEvolutionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel mt-4">
+                    <h2 class="mb-4">Répartition du budget par mission (en Millions d'€)</h2>
+                    <div class="canvas-wrapper" style="position: relative; height:300px; width:100%">
+                        <canvas id="budgetRepartitionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof initBudgetCharts === 'function') {
+                initBudgetCharts();
+            }
+        });
+    </script>
+</body>
+</html>

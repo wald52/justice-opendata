@@ -1,0 +1,62 @@
+{
+  "metrics": {
+    "delai_moyen_civil": "16,8 mois",
+    "trend_civil": "+0.5 mois",
+    "delai_moyen_penal": "11,2 mois",
+    "trend_penal": "-0.2 mois",
+    "cours_assises": "34 mois"
+  },
+  "timeseries": {
+    "labels": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "civil": [
+      13.2,
+      13.5,
+      13.8,
+      14.1,
+      14.5,
+      16.0,
+      15.8,
+      16.3,
+      16.8
+    ],
+    "penal": [
+      10.5,
+      10.4,
+      10.6,
+      10.8,
+      10.9,
+      12.0,
+      11.5,
+      11.4,
+      11.2
+    ]
+  },
+  "repartition_instances": {
+    "labels": [
+      "Tribunal Judiciaire (Civil)",
+      "Conseil de Prud'hommes",
+      "Cour d'Appel (Civil)",
+      "Tribunal de Commerce",
+      "Tribunal Correctionnel",
+      "Cour d'Assises"
+    ],
+    "data": [
+      14.5,
+      16.3,
+      17.2,
+      8.5,
+      11.2,
+      34.0
+    ]
+  }
+}

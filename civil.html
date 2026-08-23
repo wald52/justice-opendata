@@ -6,6 +6,7 @@
     <title>Justice Civile - Justice Open Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,8 +19,14 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
                 <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
-                <li class="active"><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li class='active'><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
                 <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
                 <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
             </ul>
@@ -34,65 +41,69 @@
             <header class="topbar">
                 <div class="page-title">
                     <h1>Justice Civile</h1>
-                    <p class="subtitle">Activité des Tribunaux Judiciaires, Cours d'appel et Prud'hommes</p>
+                    <p class="subtitle">Analyse du contentieux familial, social et commercial</p>
                 </div>
             </header>
 
             <div class="dashboard-content">
                 <div class="metrics-grid">
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon blue"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="metric-icon primary"><i class="fa-solid fa-file-signature"></i></div>
                         <div class="metric-details">
-                            <h3>Affaires Terminées (TJ)</h3>
-                            <p class="metric-value">1.42M</p>
-                            <span class="metric-trend positive">Total Annuel</span>
+                            <h3>Affaires Civiles (Total)</h3>
+                            <p class="metric-value" id="val-total-affaires">...</p>
+                            <span class="metric-trend" id="trend-affaires">Chargement</span>
                         </div>
                     </div>
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon yellow"><i class="fa-solid fa-clock"></i></div>
+                        <div class="metric-icon green"><i class="fa-solid fa-heart-crack"></i></div>
                         <div class="metric-details">
-                            <h3>Durée Moyenne (Divorce)</h3>
-                            <p class="metric-value">14.5m</p>
-                            <span class="metric-trend">Mois</span>
+                            <h3>Divorce (Amiable)</h3>
+                            <p class="metric-value" id="val-divorces-amiables">...</p>
+                            <span class="metric-trend">Part des divorces</span>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-icon yellow"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="metric-details">
+                            <h3>Conciliation Prud'hommes</h3>
+                            <p class="metric-value" id="val-conciliation-cph">...</p>
+                            <span class="metric-trend">Taux de conciliation</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass-panel mb-4">
-                    <h2 class="mb-4">Contentieux de la famille</h2>
-                    <p class="text-secondary mb-4">Le contentieux familial représente plus de 40% de l'activité civile des Tribunaux Judiciaires.</p>
-                    <div class="table-responsive">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Catégorie</th>
-                                    <th>Volume traité</th>
-                                    <th>Délai moyen d'écoulement</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Divorces et séparations de corps</td>
-                                    <td>125 000</td>
-                                    <td>14.5 mois</td>
-                                </tr>
-                                <tr>
-                                    <td>Autorité parentale et pensions alimentaires (hors divorce)</td>
-                                    <td>195 000</td>
-                                    <td>8.2 mois</td>
-                                </tr>
-                                <tr>
-                                    <td>Assistance éducative</td>
-                                    <td>110 000</td>
-                                    <td>6.1 mois</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="charts-grid mt-4">
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <h2>Répartition des types de divorces</h2>
+                        </div>
+                        <div class="canvas-wrapper" style="position: relative; height:320px; width:100%">
+                            <canvas id="divorcesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container glass-panel">
+                        <div class="chart-header">
+                            <h2>Évolution des mesures de tutelle (Stock)</h2>
+                        </div>
+                        <div class="canvas-wrapper" style="position: relative; height:320px; width:100%">
+                            <canvas id="tutellesChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
     <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof initCivilCharts === 'function') {
+                initCivilCharts();
+            }
+        });
+    </script>
 </body>
 </html>
