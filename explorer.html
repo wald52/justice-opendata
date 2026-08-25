@@ -3,42 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explorateur de données : explorez et visualisez tous les jeux de données open data justice.">
     <title>Explorateur de Données - Justice Open Data</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <!-- PapaParse -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <meta property="og:title" content="Explorateur - Justice Open Data France">
+    <meta property="og:description" content="Explorateur de données : explorez et visualisez tous les jeux de données open data justice.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wald52.github.io/justice-opendata/explorer.html">
+    <meta property="og:image" content="https://wald52.github.io/justice-opendata/css/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Explorateur - Justice Open Data France">
+    <meta name="twitter:description" content="Explorateur de données : explorez et visualisez tous les jeux de données open data justice.">
+    <link rel="canonical" href="https://wald52.github.io/justice-opendata/explorer.html">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+        <nav class="sidebar" role="navigation" aria-label="Navigation principale">
             <div class="sidebar-header">
-                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <i class="fa-solid fa-scale-balanced logo-icon" aria-hidden="true"></i>
                 <h2>Justice<span class="text-accent">Data</span></h2>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
-                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
-                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
-                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
-                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
-                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
-                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
-                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
-                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
-                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
-                <li class='active'><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Flux & Activité</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel" aria-hidden="true"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users" aria-hidden="true"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack" aria-hidden="true"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield" aria-hidden="true"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> Budget & Moyens</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Carte Judiciaire</a></li>
+                <li class="active" aria-current="page"><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Explorateur</a></li>
             </ul>
             <div class="sidebar-footer">
-                <button id="theme-toggle" class="btn-icon">
-                    <i class="fa-solid fa-sun"></i> Mode Clair
+                <button id="theme-toggle" class="btn-icon" aria-label="Changer de thème">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i> Mode Clair
                 </button>
             </div>
         </nav>
 
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <header class="topbar">
                 <div class="page-title">
                     <h1>Explorateur de données</h1>
@@ -51,13 +66,13 @@
                     <div style="display: flex; gap: 1rem; align-items: flex-end;">
                         <div style="flex-grow: 1;">
                             <label for="dataset-url" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">URL d'un fichier CSV (data.gouv.fr)</label>
-                            <input type="text" id="dataset-url" placeholder="https://..." value="https://www.data.gouv.fr/fr/datasets/r/5833e5fd-da99-4483-9b90-30e613a3f688" style="width: 100%; padding: 0.75rem; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary);">
+                            <input type="text" id="dataset-url" type="url" placeholder="https://..." value="https://www.data.gouv.fr/fr/datasets/r/5833e5fd-da99-4483-9b90-30e613a3f688" style="width: 100%; padding: 0.75rem; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary);">
                         </div>
                         <button class="btn btn-outline" style="background: var(--accent-primary); color: white; border: none; padding: 0.75rem 1.5rem;" onclick="loadCSV()">
-                            <i class="fa-solid fa-download"></i> Charger
+                            <i class="fa-solid fa-download" aria-hidden="true"></i> Charger
                         </button>
                     </div>
-                    <p class="text-muted mt-4" style="font-size: 0.85rem;"><i class="fa-solid fa-triangle-exclamation"></i> Note: En raison des règles CORS (sécurité des navigateurs), le chargement direct d'URLs externes peut être bloqué s'ils n'autorisent pas l'origine. En production, les scripts Python téléchargent les données.</p>
+                    <p class="text-muted mt-4" style="font-size: 0.85rem;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Note: En raison des règles CORS (sécurité des navigateurs), le chargement direct d'URLs externes peut être bloqué s'ils n'autorisent pas l'origine. En production, les scripts Python téléchargent les données.</p>
                 </div>
 
                 <div class="glass-panel" id="table-container" style="display: none;">
@@ -83,12 +98,12 @@
             const tbody = document.getElementById('table-body');
             
             container.style.display = 'block';
-            thead.innerHTML = '<th>Aperçu</th><th>Status</th>';
+            thead.innerHTML = '<th scope="col">Aperçu</th><th scope="col">Status</th>';
             tbody.innerHTML = '<tr><td>Chargement des données...</td><td>Simulé (Démo)</td></tr>';
             
             // Simuler un chargement réussi pour la démo UI
             setTimeout(() => {
-                thead.innerHTML = '<th>ID</th><th>Catégorie</th><th>Valeur 2023</th><th>Valeur 2024</th>';
+                thead.innerHTML = '<th scope="col">ID</th><th scope="col">Catégorie</th><th scope="col">Valeur 2023</th><th scope="col">Valeur 2024</th>';
                 tbody.innerHTML = `
                     <tr><td>1</td><td>Exemple A</td><td>15,400</td><td>16,200</td></tr>
                     <tr><td>2</td><td>Exemple B</td><td>8,200</td><td>7,900</td></tr>

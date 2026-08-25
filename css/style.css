@@ -15,6 +15,14 @@
     --border-radius-sm: 8px;
     --border-radius-lg: 16px;
     --border-radius-full: 9999px;
+
+    /* Aliases for legacy variable names (carte.html, etc.) */
+    --radius-sm: var(--border-radius-sm);
+    --radius-md: var(--border-radius);
+    --radius-lg: var(--border-radius-lg);
+    --bg-surface: var(--bg-panel);
+    --border: var(--border-color);
+    --accent: var(--accent-gold);
 }
 
 /* Light Theme (Default) */
@@ -267,6 +275,8 @@ ul {
 .metric-icon.red { background: linear-gradient(135deg, #f43f5e, #e11d48); }
 .metric-icon.yellow { background: linear-gradient(135deg, #f59e0b, #d97706); }
 .metric-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+.metric-icon.primary { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.metric-icon.accent { background: linear-gradient(135deg, #f59e0b, #d97706); }
 
 .metric-details h3 {
     font-size: 0.875rem;
@@ -299,6 +309,7 @@ ul {
     grid-template-columns: 2fr 1fr;
     gap: 1.5rem;
 }
+.col-span-2 { grid-column: span 2; }
 
 @media (max-width: 1024px) {
     .charts-grid {
@@ -439,6 +450,38 @@ ul {
     background-color: var(--bg-hover);
     position: sticky;
     top: 0;
+}
+
+/* Focus & A11y */
+:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: var(--accent-primary);
+    color: white;
+    border-radius: var(--border-radius-sm);
+    z-index: 1000;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    .glass-panel:hover { transform: none; }
 }
 
 /* ==========================================================================

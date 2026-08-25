@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://wald52.github.io/justice-opendata/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/index.html</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/activite.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/penal.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/civil.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/vif.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/prisons.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/aide-juridictionnelle.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/delais.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/budget.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/carte.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://wald52.github.io/justice-opendata/explorer.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>

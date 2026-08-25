@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carte judiciaire de France : juridictions géolocalisées, tribunaux judiciaires et cours d'appel.">
     <title>Carte Judiciaire - Justice Open Data</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Leaflet CSS -->
@@ -37,36 +40,48 @@
         .popup-type { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 4px; }
         .popup-communes { font-size: 0.8rem; color: var(--accent); }
     </style>
+    <meta property="og:title" content="Carte Judiciaire - Justice Open Data France">
+    <meta property="og:description" content="Carte judiciaire de France : juridictions géolocalisées, tribunaux judiciaires et cours d'appel.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wald52.github.io/justice-opendata/carte.html">
+    <meta property="og:image" content="https://wald52.github.io/justice-opendata/css/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Carte Judiciaire - Justice Open Data France">
+    <meta name="twitter:description" content="Carte judiciaire de France : juridictions géolocalisées, tribunaux judiciaires et cours d'appel.">
+    <link rel="canonical" href="https://wald52.github.io/justice-opendata/carte.html">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+        <nav class="sidebar" role="navigation" aria-label="Navigation principale">
             <div class="sidebar-header">
-                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <i class="fa-solid fa-scale-balanced logo-icon" aria-hidden="true"></i>
                 <h2>Justice<span class="text-accent">Data</span></h2>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
-                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
-                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
-                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
-                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
-                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
-                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
-                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
-                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
-                <li class='active'><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
-                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Flux & Activité</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel" aria-hidden="true"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users" aria-hidden="true"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack" aria-hidden="true"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield" aria-hidden="true"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> Budget & Moyens</a></li>
+                <li class="active" aria-current="page"><a href="carte.html"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Explorateur</a></li>
             </ul>
             <div class="sidebar-footer">
-                <button id="theme-toggle" class="btn-icon">
-                    <i class="fa-solid fa-sun"></i> Mode Clair
+                <button id="theme-toggle" class="btn-icon" aria-label="Changer de thème">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i> Mode Clair
                 </button>
             </div>
         </nav>
 
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <header class="topbar">
                 <div class="page-title">
                     <h1>Carte Judiciaire Interactive</h1>
@@ -90,7 +105,7 @@
                         <span><span class="legend-dot legend-tj"></span> Tribunaux Judiciaires</span>
                         <span><span class="legend-dot legend-cph"></span> Conseils de Prud'hommes</span>
                     </div>
-                    <div id="map" class="map-container" style="margin-top: 0.8rem;"></div>
+                    <div id="map" role="application" aria-label="Carte des juridictions" class="map-container" style="margin-top: 0.8rem;"></div>
                     <div class="map-stats" id="map-stats">
                         <div class="map-stat"><span class="stat-num" id="stat-total">—</span><span class="stat-label">juridictions affichées</span></div>
                         <div class="map-stat"><span class="stat-num" id="stat-ca">—</span><span class="stat-label">Cours d'Appel</span></div>
@@ -167,7 +182,7 @@
                 marker.bindPopup(`
                     <div class="popup-title">${j.name}</div>
                     <div class="popup-type">${typeLabels[j.type] || j.type}</div>
-                    <div class="popup-communes"><i class="fa-solid fa-city"></i> ${j.communes.toLocaleString('fr-FR')} communes rattachées</div>
+                    <div class="popup-communes"><i class="fa-solid fa-city" aria-hidden="true"></i> ${j.communes.toLocaleString('fr-FR')} communes rattachées</div>
                 `);
                 clusterGroup.addLayer(marker);
             });

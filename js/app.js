@@ -6,13 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
     
-    // Check local storage for theme preference
+    // Check local storage for theme preference, sinon prefers-color-scheme
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'dark'); // défaut dark pour cohérence actuelle
+    if (initialTheme === 'light') {
         htmlElement.classList.remove('dark');
         updateThemeButton(false);
     } else {
-        // Default is dark
         htmlElement.classList.add('dark');
         updateThemeButton(true);
     }
@@ -38,10 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function updateThemeButton(isDark) {
         if (!themeToggleBtn) return;
+        themeToggleBtn.setAttribute('aria-label', isDark ? 'Passer en mode clair' : 'Passer en mode sombre');
         if (isDark) {
-            themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Mode Clair';
+            themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun" aria-hidden="true"></i> Mode Clair';
         } else {
-            themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Mode Sombre';
+            themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon" aria-hidden="true"></i> Mode Sombre';
         }
     }
 });
@@ -57,8 +59,10 @@ const AppUtils = {
             text: isDark ? '#f8fafc' : '#0f172a',
             textSecondary: isDark ? '#94a3b8' : '#475569',
             grid: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+            border: isDark ? '#334155' : '#e2e8f0',
             primary: '#3b82f6',
             accent: '#f59e0b',
+            yellow: '#f59e0b',
             red: '#ef4444',
             green: '#10b981'
         };
@@ -66,8 +70,20 @@ const AppUtils = {
     
     // Formater les nombres (ex: 1200000 -> 1.2M)
     formatNumber: (num) => {
+        if (num == null || isNaN(num)) return '-';
         if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
         if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-        return num.toString();
+        return Number(num).toLocaleString('fr-FR');
+    },
+
+    // Setter sécurisé pour textContent
+    setText: (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value ?? '-';
+    },
+
+    setHTML: (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
     }
 };

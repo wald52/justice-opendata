@@ -9,39 +9,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Justice Open Data France - Tableau de bord global">
+    <meta property="og:description" content="Plateforme d'analyse et de visualisation des données ouvertes de la justice française - tableau de bord global.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wald52.github.io/justice-opendata/index.html">
+    <meta property="og:image" content="https://wald52.github.io/justice-opendata/css/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Justice Open Data France - Tableau de bord global">
+    <meta name="twitter:description" content="Plateforme d'analyse et de visualisation des données ouvertes de la justice française - tableau de bord global.">
+    <link rel="canonical" href="https://wald52.github.io/justice-opendata/index.html">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Aller au contenu principal</a>
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+        <nav class="sidebar" role="navigation" aria-label="Navigation principale">
             <div class="sidebar-header">
-                <i class="fa-solid fa-scale-balanced logo-icon"></i>
+                <i class="fa-solid fa-scale-balanced logo-icon" aria-hidden="true"></i>
                 <h2>Justice<span class="text-accent">Data</span></h2>
             </div>
             
             <ul class="nav-links">
-                <li class="active"><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Vue d'ensemble</a></li>
-                <li><a href="activite.html"><i class="fa-solid fa-chart-line"></i> Flux & Activité</a></li>
-                <li><a href="penal.html"><i class="fa-solid fa-gavel"></i> Justice Pénale</a></li>
-                <li><a href="civil.html"><i class="fa-solid fa-users"></i> Justice Civile</a></li>
-                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack"></i> Violences Intrafamiliales</a></li>
-                <li><a href="prisons.html"><i class="fa-solid fa-building-shield"></i> Prisons</a></li>
-                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar"></i> Aide Juridictionnelle</a></li>
-                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half"></i> Délais de Jugement</a></li>
-                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar"></i> Budget & Moyens</a></li>
-                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot"></i> Carte Judiciaire</a></li>
-                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart"></i> Explorateur</a></li>
+                <li class="active" aria-current="page"><a href="index.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Vue d'ensemble</a></li>
+                <li><a href="activite.html"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Flux & Activité</a></li>
+                <li><a href="penal.html"><i class="fa-solid fa-gavel" aria-hidden="true"></i> Justice Pénale</a></li>
+                <li><a href="civil.html"><i class="fa-solid fa-users" aria-hidden="true"></i> Justice Civile</a></li>
+                <li><a href="vif.html"><i class="fa-solid fa-house-chimney-crack" aria-hidden="true"></i> Violences Intrafamiliales</a></li>
+                <li><a href="prisons.html"><i class="fa-solid fa-building-shield" aria-hidden="true"></i> Prisons</a></li>
+                <li><a href="aide-juridictionnelle.html"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Aide Juridictionnelle</a></li>
+                <li><a href="delais.html"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Délais de Jugement</a></li>
+                <li><a href="budget.html"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i> Budget & Moyens</a></li>
+                <li><a href="carte.html"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Carte Judiciaire</a></li>
+                <li><a href="explorer.html"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Explorateur</a></li>
             </ul>
             
             <div class="sidebar-footer">
-                <button id="theme-toggle" class="btn-icon">
-                    <i class="fa-solid fa-sun"></i> Mode Clair
+                <button id="theme-toggle" class="btn-icon" aria-label="Changer de thème">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i> Mode Clair
                 </button>
                 <div class="source-info">
                     <small>Source: data.gouv.fr</small>
@@ -50,7 +62,7 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <header class="topbar">
                 <div class="page-title">
                     <h1>Tableau de bord Global</h1>
@@ -58,7 +70,7 @@
                 </div>
                 <div class="user-actions">
                     <a href="https://github.com/wald52/justice-opendata" target="_blank" class="btn btn-outline">
-                        <i class="fa-brands fa-github"></i> Code Source
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> Code Source
                     </a>
                 </div>
             </header>
@@ -67,7 +79,7 @@
                 <!-- Key Metrics Cards -->
                 <div class="metrics-grid">
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon blue"><i class="fa-solid fa-folder-open"></i></div>
+                        <div class="metric-icon blue"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Affaires Nouvelles</h3>
                             <p class="metric-value" id="idx-affaires">...</p>
@@ -76,7 +88,7 @@
                     </div>
                     
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon red"><i class="fa-solid fa-gavel"></i></div>
+                        <div class="metric-icon red"><i class="fa-solid fa-gavel" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Condamnations Pénales</h3>
                             <p class="metric-value" id="idx-condamnations">...</p>
@@ -85,16 +97,16 @@
                     </div>
                     
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon green"><i class="fa-solid fa-euro-sign"></i></div>
+                        <div class="metric-icon green"><i class="fa-solid fa-euro-sign" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Budget Justice</h3>
                             <p class="metric-value" id="idx-budget">...</p>
-                            <span class="metric-trend positive"><i class="fa-solid fa-arrow-up"></i> Historique</span>
+                            <span class="metric-trend positive"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i> Historique</span>
                         </div>
                     </div>
                     
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon yellow"><i class="fa-solid fa-building-shield"></i></div>
+                        <div class="metric-icon yellow"><i class="fa-solid fa-building-shield" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Population Carcérale</h3>
                             <p class="metric-value" id="idx-prisons">...</p>
@@ -103,7 +115,7 @@
                     </div>
                     
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon primary"><i class="fa-solid fa-file-shield"></i></div>
+                        <div class="metric-icon primary"><i class="fa-solid fa-file-shield" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Ord. Protection VIF</h3>
                             <p class="metric-value" id="idx-vif">...</p>
@@ -112,7 +124,7 @@
                     </div>
                     
                     <div class="metric-card glass-panel">
-                        <div class="metric-icon accent"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="metric-icon accent"><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i></div>
                         <div class="metric-details">
                             <h3>Aide Juridictionnelle</h3>
                             <p class="metric-value" id="idx-aj">...</p>
@@ -128,7 +140,7 @@
                             <h2>Évolution des flux contentieux comparés</h2>
                         </div>
                         <div class="canvas-wrapper" style="position: relative; height:350px; width:100%">
-                            <canvas id="activityChart"></canvas>
+                            <canvas id="activityChart" role="img" aria-label="Évolution des flux contentieux"></canvas>
                         </div>
                     </div>
                     
@@ -137,7 +149,7 @@
                             <h2>Répartition globale des contentieux</h2>
                         </div>
                         <div class="canvas-wrapper" style="position: relative; height:350px; width:100%">
-                            <canvas id="repartitionChart"></canvas>
+                            <canvas id="repartitionChart" role="img" aria-label="Répartition des contentieux"></canvas>
                         </div>
                     </div>
                 </div>
@@ -147,15 +159,15 @@
                     <h2>Dernières données disponibles</h2>
                     <div class="facts-grid">
                         <div class="fact-item">
-                            <i class="fa-solid fa-stopwatch text-accent"></i>
+                            <i class="fa-solid fa-stopwatch text-accent" aria-hidden="true"></i>
                             <p>La durée moyenne d'une affaire civile au T.J. est de <strong><span id="idx-delai">...</span></strong>.</p>
                         </div>
                         <div class="fact-item">
-                            <i class="fa-solid fa-scale-unbalanced text-accent"></i>
+                            <i class="fa-solid fa-scale-unbalanced text-accent" aria-hidden="true"></i>
                             <p>Le taux de classement sans suite au pénal atteint <strong><span id="idx-css">...</span></strong> des plaintes.</p>
                         </div>
                         <div class="fact-item">
-                            <i class="fa-solid fa-handshake-angle text-accent"></i>
+                            <i class="fa-solid fa-handshake-angle text-accent" aria-hidden="true"></i>
                             <p>Le budget prévisionnel 2024 de la mission Justice s'élève à <strong>10.1 Md€</strong>.</p>
                         </div>
                     </div>

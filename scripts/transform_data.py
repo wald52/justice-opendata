@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-import os
+"""
+Génère les JSON utilisés par le frontend à partir des données brutes
+ou de mocks basés sur les chiffres publics 2015-2024.
+
+TODO: Brancher le parsing réel des fichiers data/raw/*.xlsx/*.csv
+lorsque les sources sont disponibles.
+"""
 import json
 from pathlib import Path
-import pandas as pd
 
 BASE_DIR = Path(__file__).parent.parent
 RAW_DATA_DIR = BASE_DIR / 'data' / 'raw'
@@ -43,18 +48,6 @@ def process_prison_data():
     
     with open(PROCESSED_DATA_DIR / 'prisons.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-
-def generate_mock_time_series():
-    """Génère des données de base pour la page d'accueil"""
-    activity = {
-        "years": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
-        "series": {
-            "civil": [1850000, 1820000, 1800000, 1750000, 1720000, 1400000, 1650000, 1680000, 1700000, 1710000],
-            "penal": [1200000, 1220000, 1230000, 1210000, 1180000, 950000, 1100000, 1120000, 1150000, 1130000]
-        }
-    }
-    with open(PROCESSED_DATA_DIR / 'activity.json', 'w', encoding='utf-8') as f:
-        json.dump(activity, f, ensure_ascii=False, indent=2)
 
 def process_aide_juridictionnelle():
     """Traite les statistiques de l'aide juridictionnelle"""
@@ -239,8 +232,8 @@ def main():
     process_civil()
     process_activite()
     process_vif()
-    generate_mock_time_series()
     print("\nTerminé ! Données prêtes dans data/")
+    # Note: data/activity.json est legacy (non utilisé par le frontend) - ne plus le générer
 
 if __name__ == "__main__":
     main()
