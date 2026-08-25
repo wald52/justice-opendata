@@ -32,7 +32,7 @@ Fonctionnalités : thème clair/sombre, responsive, graphiques Chart.js interact
 
 - **Frontend** : HTML5, CSS3 (`css/style.css`), Vanilla JS (`js/app.js`, `js/charts.js`), Chart.js (CDN), FontAwesome, Google Fonts Inter
 - **Data pipeline** : Python 3.11 (`requests`, `pandas`, `openpyxl`)
-- **Hébergement** : GitHub Pages (branche `master`, dossier `/`)
+- **Hébergement** : GitHub Pages (branche `main`, dossier `/`)
 - **CI** : GitHub Actions (`.github/workflows/update_data.yml`)
 
 ## Structure
@@ -92,7 +92,7 @@ venv\Scripts\activate
 # macOS/Linux
 # source venv/bin/activate
 
-pip install requests pandas openpyxl
+pip install -r requirements.txt
 
 python scripts/fetch_data.py      # télécharge dans data/raw/
 python scripts/transform_data.py  # génère data/*.json
@@ -104,34 +104,35 @@ python scripts/transform_data.py  # génère data/*.json
 
 Le workflow `.github/workflows/update_data.yml` tourne **tous les dimanches à minuit** (cron `0 0 * * 0`) et peut être lancé manuellement (`workflow_dispatch`) :
 
-1. `actions/checkout@v4`
-2. `setup-python@v5` (3.11)
-3. `pip install requests pandas openpyxl`
-4. `python scripts/fetch_data.py`
+1. `actions/checkout@v4` (fetch-depth 0)
+2. `setup-python@v5` (3.11) avec cache pip
+3. `pip install -r requirements.txt`
+4. `python scripts/fetch_data.py` (tri par date, headers, timeout 60s)
 5. `python scripts/transform_data.py`
-6. `git add data/ && git commit && git push`
+6. `git add data/*.json && git commit && git pull --rebase && git push` (concurrency, permissions)
 
 ## Déploiement
 
-GitHub Pages est activé sur la branche `master` / racine `/`.
+GitHub Pages est activé sur la branche `main` / racine `/` (avec `.nojekyll` pour site statique).
 
 URL : **https://wald52.github.io/justice-opendata/**
 
-Toute poussée sur `master` redéploie automatiquement.
+Toute poussée sur `main` redéploie automatiquement.
 
 Pour activer manuellement :
 
 ```bash
-gh api repos/wald52/justice-opendata/pages -X POST -f source[branch]=master -f source[path]=/
-# ou via Settings > Pages > Source: Deploy from a branch > master / (root)
+gh api repos/wald52/justice-opendata/pages -X PUT -f source[branch]=main -f source[path]=/
+# ou via Settings > Pages > Source: Deploy from a branch > main / (root)
 ```
 
 ## Feuille de route
 
-- [ ] Parser réel des fichiers `data/raw/*.xlsx` / `*.csv` (prisons, juridictions)
+- [x] SEO / a11y de base (meta OG, canonical, sitemap, robots, aria, SRI, skip-link)
+- [x] CI robuste (cache, concurrency, pull rebase, requirements.txt)
+- [ ] Parser réel des fichiers `data/raw/*.xlsx` / `*.csv` (prisons, juridictions) - mocks actuels
 - [ ] Filtres temporels dynamiques sur les graphiques
 - [ ] Export CSV/PNG des graphiques
-- [ ] Accessibilité (a11y) et SEO
 
 ## Licence
 
