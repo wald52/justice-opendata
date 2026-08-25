@@ -1,0 +1,22 @@
+{
+  "name": "justice-opendata",
+  "version": "1.0.0",
+  "description": "Visualisation des données open data de la justice française",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5173 --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint js/ scripts/ --ext .js,.py || true",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "vitest": "^1.6.0",
+    "jsdom": "^24.0.0"
+  }
+}

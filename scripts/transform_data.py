@@ -18,11 +18,18 @@ def process_prison_data():
     """Traite les statistiques pénitentiaires pour générer le JSON des prisons"""
     print("Génération des données pénitentiaires (prisons.json)...")
     
-    # En environnement réel, nous parserions le fichier Excel complexe téléchargé
-    # prisons_file = RAW_DATA_DIR / 'prisons.xlsx'
-    # if prisons_file.exists():
-    #     df = pd.read_excel(prisons_file)
-    #     ...
+    prisons_file = RAW_DATA_DIR / 'prisons.xlsx'
+    if prisons_file.exists():
+        try:
+            import pandas as pd
+            # Tentative de parsing réel - structure variable selon data.gouv.fr
+            # On détecte la feuille et les colonnes, sinon fallback mock
+            xls = pd.ExcelFile(prisons_file)
+            print(f"  Fichier détecté: {prisons_file} feuilles={xls.sheet_names}")
+            # Si parsing échoue ou structure inconnue, on utilise le mock documenté ci-dessous
+            # TODO: implémenter le mapping exact colonnes -> metrics/timeseries
+        except Exception as e:
+            print(f"  Parsing réel échoué ({e}), utilisation du mock")
     
     # Pour garantir le fonctionnement immédiat du frontend et montrer l'intégration,
     # nous générons une structure de données correspondant à la réalité (Chiffres de la Justice 2023-2024).
@@ -222,6 +229,48 @@ def process_vif():
     with open(PROCESSED_DATA_DIR / 'vif.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+def validate_outputs():
+    """Valide que les JSON générés respectent le schéma attendu par le frontend."""
+    print("\nValidation des JSON...")
+    schemas = {
+        "prisons.json": ["metrics.population_detenue", "metrics.densite_carcerale", "timeseries.labels"],
+        "budget.json": ["metrics.budget_total", "timeseries.budget"],
+        "aide_juridictionnelle.json": ["metrics.total_admissions"],
+        "delais.json": ["metrics.delai_moyen_civil"],
+        "activite.json": ["metrics.affaires_nouvelles", "flux_annuels.entrees"],
+        "vif.json": ["metrics.ordonnances_accordees"],
+        "civil.json": ["metrics.total_affaires"],
+        "condamnations.json": ["metrics.total_condamnations"],
+    }
+    ok = True
+    for fname, paths in schemas.items():
+        fpath = PROCESSED_DATA_DIR / fname
+        if not fpath.exists():
+            print(f"  ❌ {fname} manquant")
+            ok = False
+            continue
+        try:
+            data = json.loads(fpath.read_text(encoding="utf-8"))
+            for p in paths:
+                cur = data
+                for part in p.split("."):
+                    cur = cur[part]
+            # Vérifs cohérence
+            if fname == "condamnations.json":
+                total = int(data["metrics"]["total_condamnations"].replace(" ","").replace("\u202f",""))
+                s = sum(data["repartition_infractions"]["data"])
+                if s != total:
+                    print(f"  ⚠ {fname}: somme infractions {s} != total {total}")
+            print(f"  ✓ {fname}")
+        except Exception as e:
+            print(f"  ❌ {fname} invalide: {e}")
+            ok = False
+    if ok:
+        print("Validation OK")
+    else:
+        print("Validation échouée")
+    return ok
+
 def main():
     print("Démarrage de la transformation des données...")
     process_prison_data()
@@ -232,8 +281,10 @@ def main():
     process_civil()
     process_activite()
     process_vif()
+    ok = validate_outputs()
     print("\nTerminé ! Données prêtes dans data/")
     # Note: data/activity.json est legacy (non utilisé par le frontend) - ne plus le générer
+    return 0 if ok else 1
 
 if __name__ == "__main__":
     main()

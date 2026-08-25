@@ -1,0 +1,17 @@
+{
+  "name": "Justice Open Data France",
+  "short_name": "JusticeData",
+  "description": "Visualisation des données ouvertes de la justice française",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "100x100",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

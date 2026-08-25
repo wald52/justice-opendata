@@ -1,0 +1,4 @@
+venv/
+dist/
+data/raw/
+data/juridictions_geo.json

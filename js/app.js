@@ -46,6 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon" aria-hidden="true"></i> Mode Sombre';
         }
     }
+
+    // Navigation hamburger (mobile)
+    const navToggle = document.getElementById('nav-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (navToggle && sidebar) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = sidebar.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
 });
 
 /**

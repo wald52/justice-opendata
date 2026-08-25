@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.py linguist-language=Python
+*.json linguist-language=JSON

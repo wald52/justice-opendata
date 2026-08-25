@@ -4,6 +4,7 @@
 
 // Variables globales pour stocker les instances de graphiques
 let charts = {};
+if (typeof window !== "undefined") window.charts = charts;
 
 // Initialisation des graphiques de la page d'accueil
 function initIndexCharts() {

@@ -21,3 +21,17 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Node / Vite
+node_modules/
+dist/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+
+# PWA
+icons/icon-*.png
+
+# Cache
+.geocode_cache.json
+.cache/

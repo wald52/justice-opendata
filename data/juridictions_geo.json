@@ -66,9 +66,9 @@
   {
     "name": "Tribunal judiciaire d'Aurillac",
     "type": "tj",
-    "city": "Tribunal judiciaire d'Aurillac",
-    "lat": 44.580732,
-    "lng": -0.19107,
+    "city": "Aurillac",
+    "lat": 44.9308,
+    "lng": 2.4405,
     "communes": 250
   },
   {
@@ -322,9 +322,9 @@
   {
     "name": "Tribunal judiciaire d'Avesnes-sur-Helpe",
     "type": "tj",
-    "city": "Tribunal judiciaire d'Avesnes-sur-Helpe",
-    "lat": 50.122767,
-    "lng": 3.928852,
+    "city": "Avesnes-sur-Helpe",
+    "lat": 50.1217,
+    "lng": 3.9258,
     "communes": 150
   },
   {
@@ -554,9 +554,9 @@
   {
     "name": "Cour d'Appel d'Aix-en-Provence",
     "type": "ca",
-    "city": "Cour d'Appel d'Aix-en-Provence",
-    "lat": 43.541369,
-    "lng": 5.406124,
+    "city": "Aix-en-Provence",
+    "lat": 43.5297,
+    "lng": 5.4474,
     "communes": 648
   },
   {
@@ -602,9 +602,9 @@
   {
     "name": "Tribunal judiciaire d'Évry-Courcouronnes",
     "type": "tj",
-    "city": "Tribunal judiciaire d'Évry-Courcouronnes",
-    "lat": 48.62729,
-    "lng": 2.43251,
+    "city": "Évry-Courcouronnes",
+    "lat": 48.6231,
+    "lng": 2.4413,
     "communes": 194
   },
   {
@@ -858,9 +858,9 @@
   {
     "name": "Tribunal judiciaire d'Aix-en-Provence",
     "type": "tj",
-    "city": "Tribunal judiciaire d'Aix-en-Provence",
-    "lat": 43.541369,
-    "lng": 5.406124,
+    "city": "Aix-en-Provence",
+    "lat": 43.5297,
+    "lng": 5.4474,
     "communes": 62
   },
   {
@@ -1434,9 +1434,9 @@
   {
     "name": "Tribunal judiciaire des Sables-d'Olonne",
     "type": "tj",
-    "city": "Tribunal judiciaire des Sables-d'Olonne",
-    "lat": 46.524364,
-    "lng": -1.765848,
+    "city": "Les Sables-d'Olonne",
+    "lat": 46.4984,
+    "lng": -1.7831,
     "communes": 80
   },
   {
@@ -2018,9 +2018,9 @@
   {
     "name": "Tribunal judiciaire du Puy-en-Velay",
     "type": "tj",
-    "city": "Tribunal judiciaire du Puy-en-Velay",
-    "lat": 45.031845,
-    "lng": 3.899669,
+    "city": "Le Puy-en-Velay",
+    "lat": 45.0428,
+    "lng": 3.8854,
     "communes": 257
   },
   {
@@ -2146,9 +2146,9 @@
   {
     "name": "Conseil de Prud'hommes d'Avesnes sur Helpe",
     "type": "cph",
-    "city": "Conseil de Prud'hommes d'Avesnes sur Helpe",
-    "lat": 50.122767,
-    "lng": 3.928852,
+    "city": "Avesnes-sur-Helpe",
+    "lat": 50.1217,
+    "lng": 3.9258,
     "communes": 150
   },
   {

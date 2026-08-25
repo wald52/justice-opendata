@@ -19,7 +19,7 @@ for f in files:
         def active(page):
             return ' class="active" aria-current="page"' if filename == page else ''
         
-        nav_html = f"""<ul class="nav-links">
+        nav_html = f"""<ul class="nav-links" id="nav-links">
                 <li{active("index.html")}><a href="index.html"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Vue d'ensemble</a></li>
                 <li{active("activite.html")}><a href="activite.html"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Flux & Activité</a></li>
                 <li{active("penal.html")}><a href="penal.html"><i class="fa-solid fa-gavel" aria-hidden="true"></i> Justice Pénale</a></li>
